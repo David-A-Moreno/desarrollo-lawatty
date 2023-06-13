@@ -94,7 +94,7 @@ export default function Modal() {
                                                 </h1>
                                                 <form data-testid="registration-form" className="space-y-6" action="#" onSubmit={handleSubmit}>
                                                     <div>
-                                                        <label htmlFor="nombre" className="block mb-2 text-sm font-medium  text-black">Nombre.</label>
+                                                        <label htmlFor="nombre" className="block mb-2 text-sm font-medium  text-black">Nombre</label>
                                                         <input type="text" name="nombre" id="nombre" value={form.nombre} onChange={handleChange} className="bg-gray-50 border border-gray-300
                                                         rounded-xl focus:ring-primary-600 text-sm focus:border-primary-600 block w-full p-2.5 text-black " placeholder="Tu nombre" required="" />
                                                     </div>
