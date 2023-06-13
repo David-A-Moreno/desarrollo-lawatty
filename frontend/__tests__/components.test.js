@@ -7,7 +7,9 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Button from '../src/app/components/button.jsx';
 import ButtonBack from '../src/app/components/buttonBack';
 import ExitButton from '../src/app/components/exitButton';
+
 import Timer from '../src/app/components/timer.jsx';
+
 //import Modal from '../components/registerModal';
 import '@testing-library/jest-dom';
 import axios from 'axios';
@@ -34,6 +36,7 @@ test('Button component calls the onClick function when clicked', () => {
   fireEvent.click(buttonElement);
   expect(onClick).toHaveBeenCalledTimes(1);
 });
+
 
 test('renderiza correctamente el componente Timer', () => {
   // Configurar los datos de prueba
@@ -83,7 +86,6 @@ test('renderiza correctamente el componente Timer', () => {
   expect(screen.getByText('Minutos')).toHaveClass(`text-${textColor}`);
   expect(screen.getByText('Segundos')).toHaveClass(`text-${textColor}`);
 });
-
 
 
 
@@ -141,7 +143,7 @@ test('ButtonBack component renders the correct text', () => {
 
   //--------------------Modal-------------------
 
-  
+
  //describe('Modal', () => {
     /*test('renders register modal correctly', () => {
       const { queryAllByText, getByRole } = render(<Modal />);

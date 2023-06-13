@@ -25,15 +25,18 @@ describe('StudyPanel component', () => {
   });
 
 
-  test("llama a console.log al hacer clic en el botón 'Cerrar Sesión'", () => {
-    console.log = jest.fn(); // Mock console.log
+  test("se cierra sesión al hacer clic en el botón 'Cerrar Sesión'", () => {
+    const mockRouterPush = jest.fn();
+    useRouter.mockReturnValue({
+      push: mockRouterPush,
+    });
 
     const { getByText } = render(<StudyPanel />);
     const closeButton = getByText("Cerrar Sesion");
 
     fireEvent.click(closeButton);
 
-    expect(console.log).toHaveBeenCalledWith("sesion Cerrada");
+    expect(mockRouterPush).toHaveBeenCalledWith('/');
   });
 
   test('renders StudyPanel component', () => {
@@ -56,16 +59,6 @@ describe('StudyPanel component', () => {
     expect(screen.getByText('Reanudar')).toBeInTheDocument();
   });
 
-  /*test('changes checked state when sound alert checkbox is clicked', () => {
-    render(<StudyPanel />);
-    
-    // Simula el cambio en la casilla de verificación de sonido de alerta
-    fireEvent.click(screen.getByLabelText('Sonido de alerta'));
-    
-    // Verifica que el estado checked cambie correctamente
-    expect(screen.getByLabelText('Sonido de alerta')).toBeChecked();
-  });*/
-
 
   test('clicking on "Suspender Sesión" button triggers navigation', () => {
     const mockRouterPush = jest.fn();
@@ -78,7 +71,7 @@ describe('StudyPanel component', () => {
     const suspenderButton = screen.getByText('Suspender Sesión');
     fireEvent.click(suspenderButton);
 
-    expect(mockRouterPush).toHaveBeenCalledWith('/');
+    expect(mockRouterPush).toHaveBeenCalledWith('/home');
   });
 
 

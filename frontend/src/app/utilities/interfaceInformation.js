@@ -60,6 +60,3 @@ export const INFORMATION = [
         lastInteface: 1
     },
 ]
-    
-
-    

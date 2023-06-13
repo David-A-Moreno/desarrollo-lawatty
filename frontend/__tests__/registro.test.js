@@ -9,6 +9,7 @@ import Modal from "../src/app/components/registerModal";
 import "@testing-library/jest-dom/extend-expect";
 import axios from "axios";
 import swal from 'sweetalert';
+import ExitButton from "../src/app/components/exitButton";
 
 // Importa la función o biblioteca que quieres mockear
 
@@ -233,4 +234,32 @@ describe("Modal component", () => {
   });
 
   // Add more tests for other scenarios and functionality as needed
+});
+
+
+describe('ExitButton', () => {
+  it('calls onClick handler when button is clicked', () => {
+    const onClickMock = jest.fn();
+    const { getByTestId } = render(<ExitButton onClick={onClickMock} />);
+    const button = getByTestId('exit-button');
+
+    fireEvent.click(button);
+
+    expect(onClickMock).toHaveBeenCalled();
+  });
+});
+
+//const [showModal, setShowModal] = useState(false);
+
+describe('ExitButton', () => {
+  it('debería llamar a setShowModal(false) al hacer clic', () => {
+    const setShowModalMock = jest.fn();
+    const { getByTestId } = render(<ExitButton onClick={() => setShowModalMock(false)} />);
+    const button = getByTestId('exit-button'); // Buscar el botón por su atributo data-testid
+
+
+    fireEvent.click(button);
+
+    expect(setShowModalMock).toHaveBeenCalledWith(false);
+  });
 });

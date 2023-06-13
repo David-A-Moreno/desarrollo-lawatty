@@ -1,5 +1,4 @@
 import React from 'react';
-import { green } from 'tailwindcss/colors';
 
 const Timer = ({ hour, min, sec, borderColor, textColor }) => {
 

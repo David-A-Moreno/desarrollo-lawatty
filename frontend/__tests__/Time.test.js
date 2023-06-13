@@ -67,3 +67,4 @@ describe('Time component', () => {
     // Verifica que las acciones setBreakTime, setIntervalBreak, setBreakButton, y setNecessaryButton hayan sido llamadas con los valores correctos
   });
 });
+

@@ -5,6 +5,7 @@ on:
     branches:
       - HU-22
       - develop
+      - cover
   pull_request:
     types: [opened, synchronize, reopened]
 
