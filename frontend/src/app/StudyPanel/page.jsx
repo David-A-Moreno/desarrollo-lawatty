@@ -1,9 +1,8 @@
 'use client';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Timer from "../components/timer";
 import Button from "../components/button";
 import { useRouter } from "next/navigation";
-import React from "react";
 
 export default function StudyPanel(){
 

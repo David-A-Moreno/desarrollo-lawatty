@@ -1,6 +1,5 @@
 'use client'
-import React from "react";
-import { useState } from "react";
+import React,{ useState } from "react";
 import axios from "axios";
 import ExitButton from "../components/exitButton";
 import swal from "sweetalert";

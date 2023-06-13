@@ -2,9 +2,8 @@
 import ButtonBack from "../components/buttonBack";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import React from "react";
+import React, { useState } from "react";
 
-import { useState } from "react";
 import { setLastInterface, setSessionTime, setBreakButton, setBreakTime, setIntervalBreak, setNecessaryButton } from "../features/answers/answersSlice";
 import PTime from "../PersonalTime/page";
 import styled from "styled-components";
@@ -30,7 +29,7 @@ export default function Time() {
 
   const [estadoM, cambiarE] = useState(false);
 
-  const [opciones, setOpciones] = useState(opcionesPredeterminadas(timeSystem));
+  const [opciones, setOpciones] = useState(OpcionesPredeterminadas(timeSystem));
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -40,7 +39,7 @@ export default function Time() {
     });
   };
 
-  function opcionesPredeterminadas(sistema) {
+  function OpcionesPredeterminadas(sistema) {
     const myObj = {
       tiempoEstudio: 0,
       tiempoDescanso: 0,
@@ -48,9 +47,10 @@ export default function Time() {
       botonDescanso: true,
       botonPausa: true
     }
+    myObj.tiempoEstudio = useSelector((state) => state.answers.sessionTime);
     if (sistema == 1) {
 
-      myObj.tiempoEstudio = useSelector((state) => state.answers.sessionTime);
+      
       myObj.tiempoDescanso = 10;
       myObj.intervaloDescanso = 50;
       myObj.botonDescanso = true;
@@ -58,7 +58,7 @@ export default function Time() {
 
     }
     else if (sistema == 2) {
-      myObj.tiempoEstudio = useSelector((state) => state.answers.sessionTime);
+      
       myObj.tiempoDescanso = 15;
       myObj.intervaloDescanso = 45;
       myObj.botonDescanso = false;
@@ -66,7 +66,6 @@ export default function Time() {
 
     }
     else {
-      myObj.tiempoEstudio = useSelector((state) => state.answers.sessionTime);
       myObj.tiempoDescanso = 5;
       myObj.intervaloDescanso = 20;
       myObj.botonDescanso = false;
