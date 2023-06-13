@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686582534584" clover="3.2.0">
-  <project timestamp="1686582534584" name="All files">
-    <metrics statements="96" coveredstatements="25" conditionals="24" coveredconditionals="4" methods="12" coveredmethods="3" elements="132" coveredelements="32" complexity="0" loc="96" ncloc="96" packages="4" files="5" classes="5"/>
+<coverage generated="1686625631672" clover="3.2.0">
+  <project timestamp="1686625631672" name="All files">
+    <metrics statements="96" coveredstatements="23" conditionals="24" coveredconditionals="4" methods="12" coveredmethods="2" elements="132" coveredelements="29" complexity="0" loc="96" ncloc="96" packages="4" files="5" classes="5"/>
     <package name="controllers">
-      <metrics statements="70" coveredstatements="9" conditionals="16" coveredconditionals="0" methods="7" coveredmethods="1"/>
-      <file name="usuarioController.js" path="C:\Users\victo\Escritorio\nuevos test\desarrollo-lawatty\backend\controllers\usuarioController.js">
-        <metrics statements="70" coveredstatements="9" conditionals="16" coveredconditionals="0" methods="7" coveredmethods="1"/>
+      <metrics statements="70" coveredstatements="7" conditionals="16" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <file name="usuarioController.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\controllers\usuarioController.js">
+        <metrics statements="70" coveredstatements="7" conditionals="16" coveredconditionals="0" methods="7" coveredmethods="0"/>
         <line num="5" count="2" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
         <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="12" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
@@ -80,12 +80,12 @@
     </package>
     <package name="helpers">
       <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
-      <file name="generarId.js" path="C:\Users\victo\Escritorio\nuevos test\desarrollo-lawatty\backend\helpers\generarId.js">
+      <file name="generarId.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\helpers\generarId.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
       </file>
-      <file name="generarJWT.js" path="C:\Users\victo\Escritorio\nuevos test\desarrollo-lawatty\backend\helpers\generarJWT.js">
+      <file name="generarJWT.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\helpers\generarJWT.js">
         <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="2" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -93,7 +93,7 @@
     </package>
     <package name="middleware">
       <metrics statements="13" coveredstatements="9" conditionals="6" coveredconditionals="4" methods="1" coveredmethods="1"/>
-      <file name="authMiddleware.js" path="C:\Users\victo\Escritorio\nuevos test\desarrollo-lawatty\backend\middleware\authMiddleware.js">
+      <file name="authMiddleware.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\middleware\authMiddleware.js">
         <metrics statements="13" coveredstatements="9" conditionals="6" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="4" count="1" type="stmt"/>
         <line num="6" count="1" type="cond" truecount="3" falsecount="1"/>
@@ -112,7 +112,7 @@
     </package>
     <package name="models">
       <metrics statements="9" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="Usuario.js" path="C:\Users\victo\Escritorio\nuevos test\desarrollo-lawatty\backend\models\Usuario.js">
+      <file name="Usuario.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\models\Usuario.js">
         <metrics statements="9" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="5" count="2" type="stmt"/>
         <line num="31" count="2" type="stmt"/>
