@@ -41,7 +41,7 @@ export default function Modal() {
         const email = form.email;
         const password = form.password;
       
-        axios.post("http://localhost:4000/api/usuarios", { nombre, password, email })
+        axios.post("https://desarrollo-lawatty-backend-mionrlzdc-david-a-moreno.vercel.app", { nombre, password, email })
           .then(async () => {
             await swal({
               title: "Registro exitoso",

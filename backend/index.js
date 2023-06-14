@@ -12,7 +12,7 @@ dotenv.config();
 
 conectarDB();
 
-const dominiosPermitidos = ['https://desarrollo-lawatty-n8opbsu5f-david-a-moreno.vercel.app/'];
+const dominiosPermitidos = ['https://desarrollo-lawatty-n8opbsu5f-david-a-moreno.vercel.app'];
 
 const corsOptions = {
     origin: function(origin, callback) {
