@@ -136,3 +136,270 @@ import {
       findOneStub.restore();
     });
   });
+
+  describe('comprobarToken', () => {
+    it('debe devolver un mensaje de token válido y usuario existente', async () => {
+      // Configurar el entorno de prueba
+      const token = 'mi_token_valido';
+      const usuarioMock = {
+        token,
+      };
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      const findOneStub = sinon.stub(Usuario, 'findOne').resolves(usuarioMock);
+  
+      // Ejecutar la función que se está probando
+      const req = { params: { token } };
+      const res = { json: sinon.stub() };
+      await comprobarToken(req, res);
+  
+      // Afirmar que Usuario.findOne fue llamado con los parámetros correctos
+      expect(findOneStub.calledOnceWithExactly({ token })).to.be.true;
+  
+      // Afirmar que se envió la respuesta JSON correcta
+      expect(res.json.calledOnceWithExactly({ msg: 'Token válido y el usuario existe' })).to.be.true;
+  
+      // Restaurar el comportamiento original de Usuario.findOne
+      findOneStub.restore();
+    });
+  
+    it('debe devolver un error cuando el token no es válido', async () => {
+      // Configurar el entorno de prueba
+      const token = 'mi_token_invalido';
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      const findOneStub = sinon.stub(Usuario, 'findOne').resolves(null);
+  
+      // Ejecutar la función que se está probando
+      const req = { params: { token } };
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+      await comprobarToken(req, res);
+  
+      // Afirmar que Usuario.findOne fue llamado con los parámetros correctos
+      expect(findOneStub.calledOnceWithExactly({ token })).to.be.true;
+  
+    
+      // Restaurar el comportamiento original de Usuario.findOne
+      findOneStub.restore();
+    });
+  });
+
+
+  describe('olvidePassword', () => {
+    it('debe devolver un mensaje de éxito al enviar las instrucciones por email', async () => {
+      // Configurar el entorno de prueba
+      const email = 'correo@example.com';
+      const usuarioMock = {
+        email,
+        token: null,
+        save: sinon.stub().resolves(),
+      };
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      const findOneStub = sinon.stub(Usuario, 'findOne').resolves(usuarioMock);
+  
+      // Ejecutar la función que se está probando
+      const req = { body: { email } };
+      const res = { json: sinon.stub() };
+      await olvidePassword(req, res);
+  
+      // Afirmar que Usuario.findOne fue llamado con los parámetros correctos
+      expect(findOneStub.calledOnceWithExactly({ email })).to.be.true;
+  
+      // Afirmar que se envió la respuesta JSON correcta
+      expect(res.json.calledOnceWithExactly({ msg: 'Hemos enviado un email con las instrucciones' })).to.be.true;
+  
+      // Afirmar que se actualizó correctamente el token y se guardó el usuario
+      expect(usuarioMock.token).to.exist;
+      expect(usuarioMock.save.calledOnce).to.be.true;
+  
+      // Restaurar el comportamiento original de Usuario.findOne
+      findOneStub.restore();
+    });
+  
+    it('debe devolver un error cuando el usuario no existe', async () => {
+      // Configurar el entorno de prueba
+      const email = 'correo_no_existente@example.com';
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      const findOneStub = sinon.stub(Usuario, 'findOne').resolves(null);
+  
+      // Ejecutar la función que se está probando
+      const req = { body: { email } };
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+      await olvidePassword(req, res);
+  
+      // Afirmar que Usuario.findOne fue llamado con los parámetros correctos
+      expect(findOneStub.calledOnceWithExactly({ email })).to.be.true;
+  
+      // Afirmar que se envió el error y el estado correspondiente
+      expect(res.status.calledOnceWithExactly(400)).to.be.true;
+      expect(res.json.calledOnceWithExactly({ msg: 'El usuario no existe' })).to.be.true;
+  
+      // Restaurar el comportamiento original de Usuario.findOne
+      findOneStub.restore();
+    });
+  });
+
+  describe('autenticar', () => {
+    afterEach(() => {
+      sinon.restore(); // Restaurar los stubs después de cada prueba
+    });
+    
+  
+    it('debe devolver un error cuando el usuario no existe', async () => {
+      // Configurar el entorno de prueba
+      const email = 'usuario_no_existente@example.com';
+      const password = 'contraseña';
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      sinon.stub(Usuario, 'findOne').resolves(null);
+  
+      // Ejecutar la función que se está probando
+      const req = { body: { email, password } };
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+      await autenticar(req, res);
+  
+      // Afirmar que se envió el error y el estado correspondiente
+      expect(res.status.calledOnceWithExactly(404)).to.be.true;
+      expect(res.json.calledOnceWithExactly({ msg: 'El usuario no existe' })).to.be.true;
+    });
+  
+    it('debe devolver un error cuando la cuenta no está confirmada', async () => {
+      // Configurar el entorno de prueba
+      const email = 'correo@example.com';
+      const password = 'contraseña';
+      const usuarioMock = {
+        email,
+        confirmado: false,
+      };
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      sinon.stub(Usuario, 'findOne').resolves(usuarioMock);
+  
+      // Ejecutar la función que se está probando
+      const req = { body: { email, password } };
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+      await autenticar(req, res);
+  
+      // Afirmar que se envió el error y el estado correspondiente
+      expect(res.status.calledOnceWithExactly(403)).to.be.true;
+      expect(res.json.calledOnceWithExactly({ msg: 'Tu cuenta no ha sido confirmada' })).to.be.true;
+    });
+  
+    it('debe devolver un error cuando la contraseña es incorrecta', async () => {
+      // Configurar el entorno de prueba
+      const email = 'correo@example.com';
+      const password = 'contraseña_incorrecta';
+      const usuarioMock = {
+        email,
+        confirmado: true,
+        comprobarPassword: sinon.stub().resolves(false),
+      };
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      sinon.stub(Usuario, 'findOne').resolves(usuarioMock);
+  
+      // Ejecutar la función que se está probando
+      const req = { body: { email, password } };
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+      await autenticar(req, res);
+  
+      // Afirmar que se envió el error y el estado correspondiente
+      expect(res.status.calledOnceWithExactly(403)).to.be.true;
+      expect(res.json.calledOnceWithExactly({ msg: 'El password es incorrecto' })).to.be.true;
+  
+      // Afirmar que se llamó a comprobarPassword con la contraseña correcta
+      expect(usuarioMock.comprobarPassword.calledOnceWithExactly(password)).to.be.true;
+    });
+  });
+  
+
+  describe('confirmar', () => {
+    afterEach(() => {
+      sinon.restore(); // Restaurar los stubs después de cada prueba
+    });
+  
+    it('debe confirmar al usuario correctamente', async () => {
+      // Configurar el entorno de prueba
+      const token = 'token_valido';
+      const usuarioMock = {
+        token,
+        save: sinon.stub().resolves(),
+      };
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      sinon.stub(Usuario, 'findOne').resolves(usuarioMock);
+  
+      // Ejecutar la función que se está probando
+      const req = { params: { token } };
+      const res = { json: sinon.stub() };
+      await confirmar(req, res);
+  
+      // Afirmar que se guardó el usuario con los valores correctos
+      expect(usuarioMock.token).to.be.null;
+      expect(usuarioMock.confirmado).to.be.true;
+  
+      // Afirmar que se envió la respuesta JSON correcta
+      expect(res.json.calledOnceWithExactly({ msg: 'Usuario Confirmado Correctamente' })).to.be.true;
+    });
+  
+    it('debe devolver un error cuando el token no es válido', async () => {
+      // Configurar el entorno de prueba
+      const token = 'token_no_valido';
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      sinon.stub(Usuario, 'findOne').resolves(null);
+  
+      // Ejecutar la función que se está probando
+      const req = { params: { token } };
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+      await confirmar(req, res);
+  
+      // Afirmar que se envió el error y el estado correspondiente
+      expect(res.status.calledOnceWithExactly(404)).to.be.true;
+      expect(res.json.calledOnceWithExactly({ msg: 'Token no válido' })).to.be.true;
+    });
+  });
+
+  describe('registrar', () => {
+    afterEach(() => {
+      sinon.restore(); // Restaurar los stubs después de cada prueba
+    });
+  
+    it('debe devolver un error cuando ya existe un usuario con el mismo email', async () => {
+      // Configurar el entorno de prueba
+      const email = 'correo@example.com';
+      const req = { body: { email } };
+      const usuarioExistenteMock = {
+        email,
+      };
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      sinon.stub(Usuario, 'findOne').resolves(usuarioExistenteMock);
+  
+      // Ejecutar la función que se está probando
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+      await registrar(req, res);
+  
+      // Afirmar que se envió el error y el estado correspondiente
+      expect(res.status.calledOnceWithExactly(400)).to.be.true;
+      expect(res.json.calledOnceWithExactly({ msg: 'Usuario ya registrado' })).to.be.true;
+    });
+  });
+
+
+  describe('perfil', () => {
+    it('debe devolver el perfil del usuario', () => {
+      // Configurar el entorno de prueba
+      const usuarioMock = { nombre: 'John Doe', edad: 30 };
+      const req = { usuario: usuarioMock };
+      const res = { json: sinon.stub() };
+  
+      // Ejecutar la función que se está probando
+      perfil(req, res);
+  
+      // Afirmar que se envió la respuesta JSON con el perfil del usuario
+      expect(res.json.calledOnceWithExactly({ perfil: usuarioMock })).to.be.true;
+    });
+  });
