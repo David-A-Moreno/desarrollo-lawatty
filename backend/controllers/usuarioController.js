@@ -7,7 +7,7 @@ const registrar = async (req, res) => {
     const {email} = req.body
 
     //prevenir usuarios duplicados
-    const existeUsuario = await Usuario.findOne({email})
+    const existeUsuario = Usuario.findOne({email})
 
     if (existeUsuario) {
         const error = new Error('Usuario ya registrado');
@@ -35,7 +35,7 @@ const perfil = (req, res) => {
 const confirmar = async (req, res) => {
     const {token} = req.params
 
-    const usuarioConfirmar = await Usuario.findOne({token});
+    const usuarioConfirmar = Usuario.findOne({token});
 
     if (!usuarioConfirmar) {
         const error = new Error('Token no válido');
@@ -58,7 +58,7 @@ const autenticar = async(req, res) => {
     const {email, password} = req.body
 
     //Comprobar si el usuario existe
-    const usuario = await Usuario.findOne({email});
+    const usuario = Usuario.findOne({email});
 
     if (!usuario) {
         const error = new Error('El usuario no existe');
@@ -84,7 +84,7 @@ const autenticar = async(req, res) => {
 
 const olvidePassword = async (req, res) => {
     const {email} = req.body
-    const existeUsuario = await Usuario.findOne({email});
+    const existeUsuario = Usuario.findOne({email});
     if (!existeUsuario) {
         const error = new Error('El usuario no existe');
         return res.status(400).json({msg:error.message});
@@ -100,7 +100,7 @@ const olvidePassword = async (req, res) => {
 };
 const comprobarToken = async (req, res) => {
     const {token} = req.params;
-    const tokenValido = await Usuario.findOne({token});
+    const tokenValido = Usuario.findOne({token});
     if (tokenValido) {
         //El token es valido el usuario existe
         res.json({msg: 'Token válido y el usuario existe'});
@@ -114,7 +114,7 @@ const nuevoPassword = async (req, res) => {
     const {token} = req.params;
     const {password} = req.body;
 
-    const usuario = await Usuario.findOne({token});
+    const usuario = Usuario.findOne({token});
     if (!usuario) {
         const error = new Error('Hubo un error');
         return res.status(400).json({msg: error.message});
@@ -124,7 +124,7 @@ const nuevoPassword = async (req, res) => {
         usuario.token = null
         usuario.password = password
         await usuario.save();
-        res.json({msg: 'Password modificado correctamente'}),
+        res.json({msg: 'Password modificado correctamente'});
         console.log(usuario);
     } catch (error) {
         console.log(error);
