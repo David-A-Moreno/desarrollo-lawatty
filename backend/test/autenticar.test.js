@@ -256,3 +256,7 @@ import {
       expect(res.json.calledOnceWithExactly({ msg: 'Usuario ya registrado' })).to.be.true;
     });
   });
+  
+
+
+  
