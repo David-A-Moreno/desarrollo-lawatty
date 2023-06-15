@@ -6,6 +6,7 @@ on:
       - HU-22
       - develop
       - cover
+      - pruebasBackend
   pull_request:
     types: [opened, synchronize, reopened]
 
