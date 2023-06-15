@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import Usuario from "../models/Usuario.js";
 import { comprobarToken } from "../controllers/usuarioController.js";
 
-describe("comprobarToken", () => {
+
   it("debe retornar un mensaje de éxito si el token es válido y el usuario existe", async () => {
     // Configurar el entorno de prueba
     const req = { params: { token: "token-valido" } };
@@ -21,7 +21,7 @@ describe("comprobarToken", () => {
 
     // Restaurar el stub de Usuario.findOne después de la prueba
     Usuario.findOne.restore(); });
-});
+
 
 describe('comprobarToken', () => {
   it('debe devolver un mensaje de token válido y usuario existente', async () => {
