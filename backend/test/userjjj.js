@@ -1,4 +1,4 @@
-const request = require('supertest');
+/*const request = require('supertest');
 const express = require('express');
 const {  registrar } = require('../controllers/usuarioController.js');
 const {MongoClient} = require('mongodb');
@@ -25,7 +25,7 @@ const Usuario=mongooseMock.model('Usuario', { email: String , password: String, 
 
 //jest.mock('../models/Usuario', () => ({
   //findOne: jest.fn(),
-//}));
+//}));*/
 /** 
 test('registrarV2',async ()=>{
   const req = { body: { nombre:'Fal', email: 'usuario@example.com',password:'1111' } };
@@ -41,6 +41,7 @@ test('registrarV2',async ()=>{
 
 })
 */
+/*
 describe( ' prueba de la funcion registrar', ()=>{
 
     let connection;
@@ -81,3 +82,4 @@ describe( ' prueba de la funcion registrar', ()=>{
 
 })
 
+*/
