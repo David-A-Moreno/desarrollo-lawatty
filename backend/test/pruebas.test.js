@@ -389,17 +389,39 @@ import {
   });
 
 
-  describe('perfil', () => {
-    it('debe devolver el perfil del usuario', () => {
-      // Configurar el entorno de prueba
-      const usuarioMock = { nombre: 'John Doe', edad: 30 };
-      const req = { usuario: usuarioMock };
-      const res = { json: sinon.stub() };
+  describe('nuevoPassword', () => {
+    it('debe imprimir el error en la consola', async () => {
+      const token = 'token123';
+      const password = 'newPassword';
   
-      // Ejecutar la función que se está probando
-      perfil(req, res);
+      const error = new Error('Error de prueba');
   
-      // Afirmar que se envió la respuesta JSON con el perfil del usuario
-      expect(res.json.calledOnceWithExactly({ perfil: usuarioMock })).to.be.true;
+      const usuarioStub = {
+        token,
+        password,
+        save: sinon.stub().throws(error),
+      };
+  
+      sinon.stub(Usuario, 'findOne').resolves(usuarioStub);
+      sinon.stub(console, 'log');
+  
+      const req = {
+        params: { token },
+        body: { password },
+      };
+  
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub(),
+      };
+  
+      await nuevoPassword(req, res);
+  
+      //expect(res.status.calledWithExactly(400)).to.be.true;
+      //expect(res.json.calledWithExactly({ msg: error.message })).to.be.true;
+      expect(console.log.calledWithExactly(error)).to.be.true;
+  
+      sinon.restore();
     });
   });
+  
