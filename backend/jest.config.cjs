@@ -3,4 +3,5 @@ module.exports = {
       '^.+\\.jsx?$': 'babel-jest',
     },
     
+    "preset": "@shelf/jest-mongodb",
   };
