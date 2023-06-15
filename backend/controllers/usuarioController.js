@@ -65,14 +65,9 @@ const autenticar = async(req, res) => {
         return res.status(404).json({msg: error.message});
     }
 
-    // Comprobar si el usuario esta confirmado
-    if (!usuario.confirmado) {
-        const error = new Error('Tu cuenta no ha sido confirmada');
-        return res.status(403).json({msg: error.message});
-    }
 
     //Revisar Password
-    if (await usuario.comprobarPassword(password)) {
+    if ( usuario.comprobarPassword(password)) {
         // Autenticar
         res.json({token: generarJWT(usuario.id)});
     }
@@ -114,7 +109,7 @@ const nuevoPassword = async (req, res) => {
     const {token} = req.params;
     const {password} = req.body;
 
-    const usuario = Usuario.findOne({token});
+    const usuario = await Usuario.findOne({token});
     if (!usuario) {
         const error = new Error('Hubo un error');
         return res.status(400).json({msg: error.message});
