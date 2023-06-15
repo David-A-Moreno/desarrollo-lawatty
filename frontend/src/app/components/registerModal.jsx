@@ -34,14 +34,14 @@ export default function Modal() {
           setErrorMessage("Las contraseñas no coinciden");
           return;
         }
-      
+        
         setErrorMessage("");
       
         const nombre = form.nombre;
         const email = form.email;
         const password = form.password;
       
-        axios.post("https://desarrollo-lawatty-backend-mionrlzdc-david-a-moreno.vercel.app", { nombre, password, email })
+        axios.post("http://localhost:4000/api/usuarios", { nombre, password, email })
           .then(async () => {
             await swal({
               title: "Registro exitoso",
