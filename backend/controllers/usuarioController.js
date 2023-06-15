@@ -2,6 +2,7 @@ import Usuario from "../models/Usuario.js";
 import generarJWT from "../helpers/generarJWT.js";
 import generarId from "../helpers/generarId.js";
 
+//funcion para registrar
 const registrar = async (req, res) => {
     const {email} = req.body
 
