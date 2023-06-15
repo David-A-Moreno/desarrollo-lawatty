@@ -34,7 +34,7 @@ export default function Modal() {
           setErrorMessage("Las contraseñas no coinciden");
           return;
         }
-      
+        
         setErrorMessage("");
       
         const nombre = form.nombre;
