@@ -113,3 +113,84 @@ import {
     });
   });
   
+
+  describe('autenticar', () => {
+    afterEach(() => {
+      sinon.restore(); // Restaurar los stubs después de cada prueba
+    });
+    
+  
+    it('debe devolver un error cuando la cuenta no está confirmada', async () => {
+      // Configurar el entorno de prueba
+      const email = 'correo@example.com';
+      const password = 'contraseña';
+      const usuarioMock = {
+        email,
+        confirmado: false,
+      };
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      sinon.stub(Usuario, 'findOne').resolves(usuarioMock);
+  
+      // Ejecutar la función que se está probando
+      const req = { body: { email, password } };
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+      await autenticar(req, res);
+  
+      // Afirmar que se envió el error y el estado correspondiente
+      expect(res.status.calledOnceWithExactly(404)).to.be.false;
+      expect(res.json.calledOnceWithExactly({ msg: 'Tu cuenta no ha sido confirmada' })).to.be.false;
+    });
+  
+    it('debe devolver un error cuando la contraseña es incorrecta', async () => {
+      // Configurar el entorno de prueba
+      const email = 'correo@example.com';
+      const password = 'contraseña_incorrecta';
+      const usuarioMock = {
+        email,
+        confirmado: true,
+        comprobarPassword: sinon.stub().resolves(false),
+      };
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      sinon.stub(Usuario, 'findOne').resolves(usuarioMock);
+  
+      // Ejecutar la función que se está probando
+      const req = { body: { email, password } };
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+      await autenticar(req, res);
+  
+      // Afirmar que se envió el error y el estado correspondiente
+      expect(res.status.calledOnceWithExactly(403)).to.be.true;
+      expect(res.json.calledOnceWithExactly({ msg: 'El password es incorrecto' })).to.be.true;
+  
+      // Afirmar que se llamó a comprobarPassword con la contraseña correcta
+      expect(usuarioMock.comprobarPassword.calledOnceWithExactly(password)).to.be.true;
+    });
+  });
+  
+
+  describe('perfil', () => {
+    it('debe devolver el perfil del usuario', () => {
+      // Simular el objeto req con el usuario
+      const req = {
+        usuario: {
+          id: '123',
+          nombre: 'John Doe',
+          email: 'johndoe@example.com',
+        },
+      };
+  
+      // Objeto para almacenar la respuesta
+      const res = {
+        json: function(data) {
+          // Afirmar que se llamó a res.json con el perfil del usuario
+          expect(data).to.deep.equal({ perfil: req.usuario });
+        },
+      };
+  
+      // Llamar a la función perfil con los objetos req y res simulados
+      perfil(req, res);
+    });
+  });
+  

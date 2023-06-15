@@ -3,47 +3,67 @@ import sinon from 'sinon';
 import Usuario from "../models/Usuario.js";
 import { olvidePassword } from "../controllers/usuarioController.js";
 
-describe("olvidePassword", () => {
-  it("debe enviar un mensaje de éxito si el usuario existe", async () => {
+describe('olvidePassword', () => {
+  it('debe devolver un mensaje de éxito al enviar las instrucciones por email', async () => {
     // Configurar el entorno de prueba
-    const req = { body: { email: "usuario@example.com" } };
-    const res = { json: sinon.spy() };
+    const email = 'correo@example.com';
+    const usuarioMock = {
+      email,
+      token: null,
+      save: sinon.stub().resolves(),
+    };
 
-    // Stub de Usuario.findOne para simular un usuario existente
-    sinon.stub(Usuario, 'findOne').resolves({ email: "usuario@example.com", save: sinon.stub().resolves() });
+    // Stub de Usuario.findOne para simular la búsqueda de usuario
+    const findOneStub = sinon.stub(Usuario, 'findOne').resolves(usuarioMock);
 
     // Ejecutar la función que se está probando
+    const req = { body: { email } };
+    const res = { json: sinon.stub() };
     await olvidePassword(req, res);
 
-    // Verificar que Usuario.findOne fue llamado con el email correcto
-    sinon.assert.calledWith(Usuario.findOne, { email: "usuario@example.com" });
+    // Afirmar que Usuario.findOne fue llamado con los parámetros correctos
+    expect(findOneStub.calledOnceWithExactly({ email })).to.be.true;
 
-    // Obtener el usuario simulado
-    const usuarioSimulado = Usuario.findOne.firstCall.returnValue;
+    // Afirmar que se envió la respuesta JSON correcta
+    expect(res.json.calledOnceWithExactly({ msg: 'Hemos enviado un email con las instrucciones' })).to.be.true;
 
-    // Verificar que se modificó el token del usuario
-    //expect(usuarioSimulado.token).to.equal("1h2uq26tk");;
+    // Afirmar que se actualizó correctamente el token y se guardó el usuario
+    expect(usuarioMock.token).to.exist;
+    expect(usuarioMock.save.calledOnce).to.be.true;
 
-    // Verificar que se guardó el usuario
-   // sinon.assert.calledOnce(usuarioSimulado.save);
-
-    // Verificar que se envió la respuesta JSON con el mensaje de éxito
-    //sinon.assert.calledWith(res.json, { msg: "Hemos enviado un email con las instrucciones" });
-
-    // Restaurar el stub de Usuario.findOne después de la prueba
-    Usuario.findOne.restore();
-  });
-
-  it("debe retornar un error si el usuario no existe", async () => {
-    // Configurar el entorno de prueba
-    const req = { body: { email: "usuario@example.com" } };
-    const res = { status: sinon.stub(), json: sinon.spy() };
-
-    // Stub de Usuario.findOne para simular que no existe un usuario con el email dado
-   // sinon.stub(Usuario, 'findOne').resolves(null);
-
-    // Ejecutar la función que se está probando
-    await olvidePassword(req, res);
-
+    // Restaurar el comportamiento original de Usuario.findOne
+    findOneStub.restore();
   });
 });
+
+describe('olvidePassword', () => {
+  it('debe imprimir el error en la consola', async () => {
+    const email = 'test@example.com';
+
+    const error = new Error('Error de prueba');
+
+    const existeUsuarioStub = {
+      save: sinon.stub().throws(error),
+    };
+
+    sinon.stub(Usuario, 'findOne').resolves(existeUsuarioStub);
+    sinon.stub(console, 'log');
+
+    const req = {
+      body: { email },
+    };
+
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+
+    await olvidePassword(req, res);
+
+    expect(console.log.calledWithExactly(error)).to.be.true;
+
+    sinon.restore();
+  });
+});
+
+

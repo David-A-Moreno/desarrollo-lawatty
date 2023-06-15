@@ -33,66 +33,70 @@ const perfil = (req, res) => {
 }
 
 const confirmar = async (req, res) => {
-    const {token} = req.params
-
-    const usuarioConfirmar = Usuario.findOne({token});
-
+    const { token } = req.params;
+  
+    const usuarioConfirmar = await Usuario.findOne({ token });
+  
     if (!usuarioConfirmar) {
-        const error = new Error('Token no válido');
-        return res.status(404).json({msg: error.message});
+      const error = new Error('Token no válido');
+      return res.status(404).json({ msg: error.message });
     }
-
+  
     try {
-        usuarioConfirmar.token = null;
-        usuarioConfirmar.confirmado = true;
-        await usuarioConfirmar.save();
-
-        res.json({msg: 'Usuario Confirmado Correctamente'});
+      usuarioConfirmar.token = null;
+      usuarioConfirmar.confirmado = true;
+      await usuarioConfirmar.save();
+  
+      res.json({ msg: 'Usuario Confirmado Correctamente' });
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-
-};
-
-const autenticar = async(req, res) => {
-    const {email, password} = req.body
-
-    //Comprobar si el usuario existe
-    const usuario = Usuario.findOne({email});
-
+  };
+  
+const autenticar = async (req, res) => {
+    const { email, password } = req.body;
+  
+    // Comprobar si el usuario existe
+    const usuario = await Usuario.findOne({ email });
+  
     if (!usuario) {
-        const error = new Error('El usuario no existe');
-        return res.status(404).json({msg: error.message});
+      const error = new Error('El usuario no existe');
+      return res.status(404).json({ msg: error.message });
     }
-
-
-    //Revisar Password
-    if ( usuario.comprobarPassword(password)) {
+  
+    try {
+      // Revisar Password
+      const passwordCorrecto = await usuario.comprobarPassword(password);
+      if (passwordCorrecto) {
         // Autenticar
         res.json({token: generarJWT(usuario.id)});
-    }
-    else {
+      } else {
         const error = new Error('El password es incorrecto');
-        return res.status(403).json({msg: error.message});
+        return res.status(403).json({ msg: error.message });
+      }
+    } catch (error) {
+      console.log(error);
     }
-};
+  };
+  
 
 const olvidePassword = async (req, res) => {
-    const {email} = req.body
-    const existeUsuario = Usuario.findOne({email});
+    const { email } = req.body;
+    const existeUsuario = await Usuario.findOne({ email });
     if (!existeUsuario) {
-        const error = new Error('El usuario no existe');
-        return res.status(400).json({msg:error.message});
+      const error = new Error('El usuario no existe');
+      return res.status(400).json({ msg: error.message });
     }
-
+  
     try {
-        existeUsuario.token = generarId();
-        await existeUsuario.save();
-        res.json({msg: 'Hemos enviado un email con las instrucciones'});
+      existeUsuario.token = generarId();
+      await existeUsuario.save();
+      res.json({ msg: 'Hemos enviado un email con las instrucciones' });
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-};
+  };
+  
 const comprobarToken = async (req, res) => {
     const { token } = req.params;
     const tokenValido = await Usuario.findOne({ token });
