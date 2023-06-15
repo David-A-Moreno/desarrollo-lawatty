@@ -425,3 +425,64 @@ import {
     });
   });
   
+
+  describe('olvidePassword', () => {
+    it('debe imprimir el error en la consola', async () => {
+      const email = 'test@example.com';
+  
+      const error = new Error('Error de prueba');
+  
+      const existeUsuarioStub = {
+        save: sinon.stub().throws(error),
+      };
+  
+      sinon.stub(Usuario, 'findOne').resolves(existeUsuarioStub);
+      sinon.stub(console, 'log');
+  
+      const req = {
+        body: { email },
+      };
+  
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub(),
+      };
+  
+      await olvidePassword(req, res);
+  
+      expect(console.log.calledWithExactly(error)).to.be.true;
+  
+      sinon.restore();
+    });
+  });
+
+  
+describe('confirmar', () => {
+    it('debe imprimir el error en la consola', async () => {
+      const token = 'testToken';
+  
+      const error = new Error('Error de prueba');
+  
+      const usuarioConfirmarStub = {
+        save: sinon.stub().throws(error),
+      };
+  
+      sinon.stub(Usuario, 'findOne').resolves(usuarioConfirmarStub);
+      sinon.stub(console, 'log');
+  
+      const req = {
+        params: { token },
+      };
+  
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub(),
+      };
+  
+      await confirmar(req, res);
+  
+      expect(console.log.calledWithExactly(error)).to.be.true;
+  
+      sinon.restore();
+    });
+  });

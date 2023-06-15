@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686797264672" clover="3.2.0">
-  <project timestamp="1686797264673" name="All files">
-    <metrics statements="96" coveredstatements="85" conditionals="24" coveredconditionals="21" methods="12" coveredmethods="9" elements="132" coveredelements="115" complexity="0" loc="96" ncloc="96" packages="4" files="5" classes="5"/>
+<coverage generated="1686797645597" clover="3.2.0">
+  <project timestamp="1686797645597" name="All files">
+    <metrics statements="96" coveredstatements="87" conditionals="24" coveredconditionals="21" methods="12" coveredmethods="9" elements="132" coveredelements="117" complexity="0" loc="96" ncloc="96" packages="4" files="5" classes="5"/>
     <package name="controllers">
-      <metrics statements="70" coveredstatements="64" conditionals="16" coveredconditionals="15" methods="7" coveredmethods="6"/>
+      <metrics statements="70" coveredstatements="66" conditionals="16" coveredconditionals="15" methods="7" coveredmethods="6"/>
       <file name="usuarioController.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\controllers\usuarioController.js">
-        <metrics statements="70" coveredstatements="64" conditionals="16" coveredconditionals="15" methods="7" coveredmethods="6"/>
+        <metrics statements="70" coveredstatements="66" conditionals="16" coveredconditionals="15" methods="7" coveredmethods="6"/>
         <line num="5" count="3" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
         <line num="9" count="2" type="stmt"/>
@@ -21,17 +21,17 @@
         <line num="29" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
         <line num="34" count="3" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
-        <line num="39" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="37" count="3" type="stmt"/>
+        <line num="39" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="40" count="1" type="stmt"/>
         <line num="41" count="1" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
         <line num="56" count="3" type="stmt"/>
         <line num="57" count="3" type="stmt"/>
         <line num="60" count="3" type="stmt"/>
@@ -46,16 +46,16 @@
         <line num="79" count="1" type="stmt"/>
         <line num="80" count="1" type="stmt"/>
         <line num="84" count="3" type="stmt"/>
-        <line num="85" count="2" type="stmt"/>
-        <line num="86" count="2" type="stmt"/>
-        <line num="87" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="85" count="3" type="stmt"/>
+        <line num="86" count="3" type="stmt"/>
+        <line num="87" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="88" count="1" type="stmt"/>
         <line num="89" count="1" type="stmt"/>
-        <line num="92" count="1" type="stmt"/>
-        <line num="93" count="1" type="stmt"/>
-        <line num="94" count="1" type="stmt"/>
+        <line num="92" count="2" type="stmt"/>
+        <line num="93" count="2" type="stmt"/>
+        <line num="94" count="2" type="stmt"/>
         <line num="95" count="1" type="stmt"/>
-        <line num="97" count="0" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
         <line num="100" count="3" type="stmt"/>
         <line num="101" count="2" type="stmt"/>
         <line num="102" count="2" type="stmt"/>
@@ -83,7 +83,7 @@
       <file name="generarId.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\helpers\generarId.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="5" type="stmt"/>
-        <line num="2" count="5" type="stmt"/>
+        <line num="2" count="6" type="stmt"/>
       </file>
       <file name="generarJWT.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\helpers\generarJWT.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
