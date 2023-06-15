@@ -25,6 +25,9 @@ jobs:
       - name: Test and Coverage(frontend)
         working-directory: ./frontend
         run: yarn jest --coverage
+      - name: Install dependencies in backend
+        working-directory: ./backend
+        run: yarn
       - name: Test and Coverage(Backend)
         working-directory: ./backend
         run: yarn jest --coverage
