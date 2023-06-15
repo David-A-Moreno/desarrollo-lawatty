@@ -1,4 +1,4 @@
-const { registrar, autenticar} =require("../controllers/usuarioController.js");
+
 const Usuario= require("../models/Usuario.js")
 import checkAuth from "../middleware/authMiddleware";
 
