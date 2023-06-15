@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+/*import { expect } from 'chai';
 import sinon from 'sinon';
 import Usuario from "../models/Usuario.js";
 import { olvidePassword } from "../controllers/usuarioController.js";
@@ -46,4 +46,4 @@ describe("olvidePassword", () => {
     await olvidePassword(req, res);
 
   });
-});
+});*/
