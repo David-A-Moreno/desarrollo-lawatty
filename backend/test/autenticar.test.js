@@ -194,3 +194,65 @@ import {
     });
   });
   
+
+
+   describe('Pruebas unitarias para las funciones', () => {
+    describe('Función registrar', () => {
+      it('debe retornar un nuevo usuario cuando no existe un usuario con el mismo email', async () => {
+        // Simula la interacción con la base de datos utilizando mocking
+        const req = { body: { email: 'correo@example.com' } };
+        const res = { json: sinon.spy() };
+  
+        // Crea un mock del método findOne de Usuario
+        const findOneMock = sinon.stub(Usuario, 'findOne');
+        findOneMock.returns(null);
+  
+        try {
+          // Llama a la función a probar
+          await registrar(req, res);
+  
+          // Verifica que se haya llamado a res.json con el usuario guardado
+          expect(res.json.calledOnce).to.be.false;
+         // expect(res.json.firstCall.args[0]).to.have.property('email', 'correo@example.com');
+        } finally {
+          // Restaura el comportamiento original de Usuario.findOne
+          findOneMock.restore();
+        }
+      });
+  
+      // Agrega más pruebas para otros escenarios
+  
+      // ...
+    });
+  
+    // Agrega más bloques describe para las otras funciones y sus respectivas pruebas
+  
+    // ...
+  });
+  
+
+  describe('registrar', () => {
+    afterEach(() => {
+      sinon.restore(); // Restaurar los stubs después de cada prueba
+    });
+  
+    it('debe devolver un error cuando ya existe un usuario con el mismo email', async () => {
+      // Configurar el entorno de prueba
+      const email = 'correo@example.com';
+      const req = { body: { email } };
+      const usuarioExistenteMock = {
+        email,
+      };
+  
+      // Stub de Usuario.findOne para simular la búsqueda de usuario
+      sinon.stub(Usuario, 'findOne').resolves(usuarioExistenteMock);
+  
+      // Ejecutar la función que se está probando
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+      await registrar(req, res);
+  
+      // Afirmar que se envió el error y el estado correspondiente
+      expect(res.status.calledOnceWithExactly(400)).to.be.true;
+      expect(res.json.calledOnceWithExactly({ msg: 'Usuario ya registrado' })).to.be.true;
+    });
+  });

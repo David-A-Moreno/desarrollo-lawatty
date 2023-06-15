@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">79.16% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>57/72</span>
+                <span class='fraction'>66/72</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.28% </span>
+                <span class="strong">78.57% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/14</span>
+                <span class='fraction'>11/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">79.16% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>57/72</span>
+                <span class='fraction'>66/72</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -211,24 +211,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -352,25 +352,25 @@ import generarJWT from "../helpers/generarJWT.js";
 import generarId from "../helpers/generarId.js";
 &nbsp;
 //funcion para registrar
-const registrar = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-    const {email} = <span class="cstat-no" title="statement not covered" >req.body</span>
+const registrar = async (req, res) =&gt; {
+    const {email} = req.body
 &nbsp;
     //prevenir usuarios duplicados
-    const existeUsuario = <span class="cstat-no" title="statement not covered" >await Usuario.findOne({email})</span>
+    const existeUsuario = await Usuario.findOne({email})
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (existeUsuario) {</span>
-        const error = <span class="cstat-no" title="statement not covered" >new Error('Usuario ya registrado');</span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).json({msg: error.message});</span>
+    if (existeUsuario) {
+        const error = new Error('Usuario ya registrado');
+        return res.status(400).json({msg: error.message});
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    try {</span>
+    try {
         //Guardar un nuevo Usuario
-        const usuario = <span class="cstat-no" title="statement not covered" >new Usuario(req.body);</span>
-        const usuarioGuardado = <span class="cstat-no" title="statement not covered" >await usuario.save();</span>
+        const usuario = new Usuario(req.body);
+        const usuarioGuardado = await usuario.save();
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        res.json(usuarioGuardado);</span>
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >        console.log(error)</span>
+        console.log(error)
     }
 };
 &nbsp;
@@ -496,7 +496,7 @@ export {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-15T18:27:19.565Z
+                at 2023-06-15T18:46:17.994Z
             </div>
         <script src="../prettify.js"></script>
         <script>
