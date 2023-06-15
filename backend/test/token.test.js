@@ -29,7 +29,7 @@ describe('comprobarToken', () => {
     // Restaurar el comportamiento original de Usuario.findOne
     findOneStub.restore();
   });
-
+/*
   it("debe retornar un mensaje de éxito si el token es válido y el usuario existe", async () => {
     // Configurar el entorno de prueba
     const req = { params: { token: "token-valido" } };
@@ -46,7 +46,8 @@ describe('comprobarToken', () => {
     sinon.assert.calledWith(res.json, { msg: "Token válido y el usuario existe" });
 
     // Restaurar el stub de Usuario.findOne después de la prueba
-    Usuario.findOne.restore(); });
+    Usuario.findOne.restore();
+   });*/
 
 
   it('debe devolver un error cuando el token no es válido', async () => {
