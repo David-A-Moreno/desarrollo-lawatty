@@ -106,25 +106,27 @@ const comprobarToken = async (req, res) => {
     }
 };
 const nuevoPassword = async (req, res) => {
-    const {token} = req.params;
-    const {password} = req.body;
-
-    const usuario = await Usuario.findOne({token});
-    if (!usuario) {
-        const error = new Error('Hubo un error');
-        return res.status(400).json({msg: error.message});
-    }
+    const { token } = req.params;
+    const { password } = req.body;
 
     try {
-        usuario.token = null
-        usuario.password = password
+        const usuario = await Usuario.findOne({ token });
+        if (!usuario) {
+            const error = new Error('Hubo un error');
+            return res.status(400).json({ msg: error.message });
+        }
+
+        usuario.token = null;
+        usuario.password = password;
         await usuario.save();
-        res.json({msg: 'Password modificado correctamente'});
+        res.json({ msg: 'Password modificado correctamente' });
         console.log(usuario);
     } catch (error) {
         console.log(error);
+        res.status(500).json({ msg: 'Hubo un error al modificar la contraseña' });
     }
 };
+
 
 export {
     registrar,

@@ -1,4 +1,4 @@
-/*import { expect } from 'chai';
+import { expect } from 'chai';
 import sinon from 'sinon';
 import Usuario from "../models/Usuario.js";
 import { comprobarToken } from "../controllers/usuarioController.js";
@@ -26,4 +26,3 @@ describe("comprobarToken", () => {
   });
 
 });
-*/
