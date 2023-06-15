@@ -70,7 +70,7 @@ describe("LoginPage", () => {
     // Esperar a que se complete la llamada a axios.post y se redireccione
     await waitFor(() => {
       expect(axios.post).toHaveBeenCalledWith(
-        "http://localhost:4000/api/usuarios/login",
+        "https://desarrollo-lawatty-backend.vercel.app/api/usuarios/login",
         {
           email: "mm@gmail.com",
           password: "1111",
@@ -114,7 +114,7 @@ describe("LoginPage3", () => {
     // Esperar a que se complete la llamada a axios.post y se muestre la alerta de error
     await waitFor(() => {
       expect(axios.post).toHaveBeenCalledWith(
-        "http://localhost:4000/api/usuarios/login",
+        "https://desarrollo-lawatty-backend.vercel.app/api/usuarios/login",
         {
           email: "test@example.com",
           password: "password123",
