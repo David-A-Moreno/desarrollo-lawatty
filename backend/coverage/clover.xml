@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686868773151" clover="3.2.0">
-  <project timestamp="1686868773151" name="All files">
+<coverage generated="1686872316613" clover="3.2.0">
+  <project timestamp="1686872316614" name="All files">
     <metrics statements="98" coveredstatements="92" conditionals="20" coveredconditionals="16" methods="12" coveredmethods="11" elements="130" coveredelements="119" complexity="0" loc="98" ncloc="98" packages="4" files="5" classes="5"/>
     <package name="controllers">
       <metrics statements="72" coveredstatements="70" conditionals="14" coveredconditionals="13" methods="7" coveredmethods="7"/>
-      <file name="usuarioController.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\controllers\usuarioController.js">
+      <file name="usuarioController.js" path="D:\David\DESARROLLO\backend\controllers\usuarioController.js">
         <metrics statements="72" coveredstatements="70" conditionals="14" coveredconditionals="13" methods="7" coveredmethods="7"/>
         <line num="6" count="4" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
@@ -82,12 +82,12 @@
     </package>
     <package name="helpers">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <file name="generarId.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\helpers\generarId.js">
+      <file name="generarId.js" path="D:\David\DESARROLLO\backend\helpers\generarId.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="7" type="stmt"/>
         <line num="2" count="10" type="stmt"/>
       </file>
-      <file name="generarJWT.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\helpers\generarJWT.js">
+      <file name="generarJWT.js" path="D:\David\DESARROLLO\backend\helpers\generarJWT.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="3" count="5" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -95,7 +95,7 @@
     </package>
     <package name="middleware">
       <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
-      <file name="authMiddleware.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\middleware\authMiddleware.js">
+      <file name="authMiddleware.js" path="D:\David\DESARROLLO\backend\middleware\authMiddleware.js">
         <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="5" count="2" type="stmt"/>
         <line num="7" count="3" type="cond" truecount="2" falsecount="0"/>
@@ -114,7 +114,7 @@
     </package>
     <package name="models">
       <metrics statements="9" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="1"/>
-      <file name="Usuario.js" path="C:\Users\Marcela\OneDrive\Documentos\2023-1\Desarrollo 2\la del pruebas\desarrollo-lawatty\backend\models\Usuario.js">
+      <file name="Usuario.js" path="D:\David\DESARROLLO\backend\models\Usuario.js">
         <metrics statements="9" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="5" count="7" type="stmt"/>
         <line num="31" count="7" type="stmt"/>
