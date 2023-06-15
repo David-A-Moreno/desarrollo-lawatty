@@ -26,3 +26,50 @@ describe("comprobarToken", () => {
   });
 
 });
+
+describe('comprobarToken', () => {
+  it('debe devolver un mensaje de token válido y usuario existente', async () => {
+    // Configurar el entorno de prueba
+    const token = 'mi_token_valido';
+    const usuarioMock = {
+      token,
+    };
+
+    // Stub de Usuario.findOne para simular la búsqueda de usuario
+    const findOneStub = sinon.stub(Usuario, 'findOne').resolves(usuarioMock);
+
+    // Ejecutar la función que se está probando
+    const req = { params: { token } };
+    const res = { json: sinon.stub() };
+    await comprobarToken(req, res);
+
+    // Afirmar que Usuario.findOne fue llamado con los parámetros correctos
+    expect(findOneStub.calledOnceWithExactly({ token })).to.be.true;
+
+    // Afirmar que se envió la respuesta JSON correcta
+    expect(res.json.calledOnceWithExactly({ msg: 'Token válido y el usuario existe' })).to.be.true;
+
+    // Restaurar el comportamiento original de Usuario.findOne
+    findOneStub.restore();
+  });
+
+  it('debe devolver un error cuando el token no es válido', async () => {
+    // Configurar el entorno de prueba
+    const token = 'mi_token_invalido';
+
+    // Stub de Usuario.findOne para simular la búsqueda de usuario
+    const findOneStub = sinon.stub(Usuario, 'findOne').resolves(null);
+
+    // Ejecutar la función que se está probando
+    const req = { params: { token } };
+    const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+    await comprobarToken(req, res);
+
+    // Afirmar que Usuario.findOne fue llamado con los parámetros correctos
+    expect(findOneStub.calledOnceWithExactly({ token })).to.be.true;
+
+  
+    // Restaurar el comportamiento original de Usuario.findOne
+    findOneStub.restore();
+  });
+});

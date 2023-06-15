@@ -94,17 +94,17 @@ const olvidePassword = async (req, res) => {
     }
 };
 const comprobarToken = async (req, res) => {
-    const {token} = req.params;
-    const tokenValido = Usuario.findOne({token});
+    const { token } = req.params;
+    const tokenValido = await Usuario.findOne({ token });
     if (tokenValido) {
-        //El token es valido el usuario existe
-        res.json({msg: 'Token válido y el usuario existe'});
+      // El token es válido y el usuario existe
+      res.json({ msg: 'Token válido y el usuario existe' });
+    } else {
+      const error = new Error('Token no válido');
+      return res.status(400).json({ msg: error.message });
     }
-    else {
-        const error = new Error('Token no valido');
-        return res.status(400).json({msg: error.message});
-    }
-};
+  };
+  
 const nuevoPassword = async (req, res) => {
     const { token } = req.params;
     const { password } = req.body;
