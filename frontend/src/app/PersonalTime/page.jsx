@@ -1,4 +1,4 @@
-
+"use client";
     import React from "react";
     import ButtonBack from "../components/buttonBack";
     import { useRouter } from "next/navigation";
