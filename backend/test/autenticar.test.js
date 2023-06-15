@@ -301,4 +301,25 @@ import {
       expect(usuarioExistente.token).not.to.be.null;
     });
   });
+
   
+  it('debe devolver un status 400 si el usuario no existe', async () => {
+    // Configurar el entorno de prueba
+    const email = 'correo@example.com';
+    const req = { body: { email } };
+    
+
+    // Stub de Usuario.findOne para simular la búsqueda de usuario
+    sinon.stub(Usuario, 'findOne').resolves(null);
+
+    // Ejecutar la función que se está probando
+    const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+   
+
+    // Ejecutar la función que se está probando
+    await autenticar(req, res);
+
+    
+    // Verificar el resultado
+    expect(res.status.calledOnceWithExactly(404)).to.be.true;
+ });
