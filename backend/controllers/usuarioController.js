@@ -57,7 +57,7 @@ const autenticar = async (req, res) => {
     const { email, password } = req.body;
   
     // Comprobar si el usuario existe
-    const usuario = await Usuario.findOne({ email });
+    const usuario = await Promise.resolve(Usuario.findOne({ email }));
   
     if (!usuario) {
       const error = new Error('El usuario no existe');
@@ -82,7 +82,7 @@ const autenticar = async (req, res) => {
 
 const olvidePassword = async (req, res) => {
     const { email } = req.body;
-    const existeUsuario = await Usuario.findOne({ email });
+    const existeUsuario = await Promise.resolve(Usuario.findOne({ email }));
     if (!existeUsuario) {
       const error = new Error('El usuario no existe');
       return res.status(400).json({ msg: error.message });
@@ -99,7 +99,7 @@ const olvidePassword = async (req, res) => {
   
 const comprobarToken = async (req, res) => {
     const { token } = req.params;
-    const tokenValido = await Usuario.findOne({ token });
+    const tokenValido = await Promise.resolve(Usuario.findOne({ token }));
     if (tokenValido) {
       // El token es válido y el usuario existe
       res.json({ msg: 'Token válido y el usuario existe' });
@@ -114,7 +114,7 @@ const nuevoPassword = async (req, res) => {
     const { password } = req.body;
 
     try {
-        const usuario = await Usuario.findOne({ token });
+        const usuario = await Promise.resolve(Usuario.findOne({ token }));
         if (!usuario) {
             const error = new Error('Hubo un error');
             return res.status(400).json({ msg: error.message });
