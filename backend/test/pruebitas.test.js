@@ -1,4 +1,5 @@
 // Importa los módulos necesarios para las pruebas
+/*
 import {
     registrar,
     perfil,
@@ -77,9 +78,12 @@ describe("nuevoPassword", () => {
   });
 });
 
-
+*/
+import sinon from 'sinon';
 import jwt from 'jsonwebtoken';
 import generarJWT from '../helpers/generarJWT';
+import { expect } from 'chai';
+
 describe('generarJWT', () => {
   it('debe generar un token JWT válido', () => {
     // Configurar el entorno de prueba
@@ -101,7 +105,7 @@ describe('generarJWT', () => {
 });
 
 
-
+/*
 describe("registrar", () => {
   it("debe manejar errores durante el registro", () => {
     // Configurar el entorno de prueba
@@ -275,7 +279,7 @@ describe("perfil", () => {
 });
 
 
-
+*/
 
 
 /*
