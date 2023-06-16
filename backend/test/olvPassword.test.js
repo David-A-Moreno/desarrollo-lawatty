@@ -60,7 +60,7 @@ describe('olvidePassword', () => {
 
     await olvidePassword(req, res);
 
-    expect(console.log.calledWithExactly(error)).to.be.false;
+    expect(console.log.calledWithExactly(error)).to.be.true;
 
     sinon.restore();
   });
