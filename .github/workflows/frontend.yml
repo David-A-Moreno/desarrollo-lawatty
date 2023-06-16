@@ -1,12 +1,12 @@
 name: Build and Test
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT2_ID }}
 
 on:
   push:
     branches:
-      - HU-22
-      - develop
-      - cover
-      - pruebasBackend
+      - '*'
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -25,14 +25,22 @@ jobs:
       - name: Test and Coverage(frontend)
         working-directory: ./frontend
         run: yarn jest --coverage
-      - name: Install dependencies in backend
-        working-directory: ./backend
-        run: yarn
-      - name: Test and Coverage(Backend)
-        working-directory: ./backend
-        run: yarn jest --coverage
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          
+  Deploy-Preview:
+    needs: sonarcloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
