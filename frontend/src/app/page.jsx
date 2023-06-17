@@ -12,7 +12,7 @@ export default function LoginPage() {
   const handleLogin = (e) => {
     e.preventDefault();
   
-    axios.post("http://localhost:4000/api/usuarios/login", { email, password })
+    axios.post("https://desarrollo-lawatty-backend.vercel.app/api/usuarios/login", { email, password })
       .then(async () => {
         
 
