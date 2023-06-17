@@ -13,6 +13,7 @@ export default function RootLayout({ children }) {
     <html>
       <body>
         <Providers>
+          <Analytics/>
           {children}
         </Providers>
       </body>
