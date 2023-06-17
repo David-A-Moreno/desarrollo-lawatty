@@ -6,6 +6,7 @@ on:
       - HU-22
       - develop
       - cover
+      - pruebasBackend
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -21,8 +22,14 @@ jobs:
       - name: Install dependencies in root
         working-directory: ./
         run: yarn
-      - name: Test and Coverage
+      - name: Test and Coverage(frontend)
         working-directory: ./frontend
+        run: yarn jest --coverage
+      - name: Install dependencies in backend
+        working-directory: ./backend
+        run: yarn
+      - name: Test and Coverage(Backend)
+        working-directory: ./backend
         run: yarn jest --coverage
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
