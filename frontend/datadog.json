@@ -1,0 +1,19 @@
+{
+	"name": "datadog",
+	"type": "query alert",
+	"query": "avg(last_5m):avg:system.load.1{*} > 10000",
+	"message": "ha subido las metricas atencion",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": 10000,
+			"warning": 1000
+		},
+		"notify_audit": true,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false
+	},
+	"priority": 3
+}
