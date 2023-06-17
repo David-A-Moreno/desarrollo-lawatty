@@ -1,6 +1,7 @@
 import './globals.css'
 import React from 'react'
 import { Providers } from './provider'
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
   title: 'Lawatty',
