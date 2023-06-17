@@ -91,11 +91,6 @@ export default function LoginPage() {
               Iniciar sesión
             </button>
           </div>
-          <div>
-            <button className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md border-gray bg-gray-line shadow-sm shadow-purple-text ">
-              Iniciar sesión con Google
-            </button>
-          </div>
         </form>
         <div className="flex items-center justify-between">
           <div className="flex items-center">
