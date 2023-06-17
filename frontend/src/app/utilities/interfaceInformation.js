@@ -6,10 +6,6 @@ export const INFORMATION = [
                 optionTitle: "Sesión de estudio o trabajo",
                 nextInterface: 1
             },
-            {
-                optionTitle: "Ver estadísticas",
-                nextInterface: '/statistics'
-            },
         ],
         goBackButton: false,
         lastInteface: 0
