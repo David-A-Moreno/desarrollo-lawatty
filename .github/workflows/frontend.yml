@@ -7,15 +7,13 @@ on:
   push:
     branches:
       - '*'
-      
-  pull_request:
-    branches:
-      - main
-    types: [opened, closed]
 
   pull_request:
     branches:
-      - develop
+      - main
+    types: [closed]
+
+  pull_request_target:
     types: [opened, synchronize, reopened]
 
 jobs:
