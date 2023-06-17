@@ -11,9 +11,6 @@ on:
   pull_request:
     branches:
       - main
-    types: [closed]
-
-  pull_request_target:
     types: [opened, synchronize, reopened]
 
 jobs:
@@ -54,7 +51,7 @@ jobs:
   Deploy-Production:
     needs: sonarcloud
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event.pull_request.merged == true
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
